@@ -1,32 +1,27 @@
 class Solution {
 public:
-    string countAndSay(int n) {
-        string current = "1";
-
-        for (int round = 1; round < n; round++) {
-            string next = "";
-
-            int index = 0;
-
-            while (index < current.length()) {
-                char digit = current[index];
-                int count = 0;
-
-                // 统计从 index 开始，有多少个连续相同字符
-                while (index < current.length() &&
-                       current[index] == digit) {
+    string countAndSay(int n) 
+    {
+        string nums="1";
+        string lastNums;
+        for(int j=1;j<n;j++)
+        {
+            string lastNums=nums;
+            nums="";
+            int i=0;
+            while(i<lastNums.length())
+            {
+                char current=lastNums[i];
+                int count=0;
+                while (i<lastNums.length()&&lastNums[i]==current) 
+                {
                     count++;
-                    index++;
+                    i++;
                 }
-
-                // 先加入数量，再加入字符
-                next += to_string(count);
-                next += digit;
+                nums+=to_string(count);
+                nums+=current;
             }
-
-            current = next;
         }
-
-        return current;
+        return nums;
     }
 };
